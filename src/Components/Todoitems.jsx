@@ -5,35 +5,35 @@ import cross from './assets/cross.png';
 
 const Todoitems = ({ no, display, text, setTodos }) => {
   
-  const Tododelete = (no) => {
-    let data = JSON.parse(localStorage.getItem("todos")) || [];
-    data = data.filter((todo) => todo.no !== no);
-    
-    setTodos(data);
-    localStorage.setItem("todos", JSON.stringify(data)); // Update localStorage
+  const Tododelete = () => {
+    setTodos((prevTodos) => {
+      const updatedTodos = prevTodos.filter((todo) => todo.no !== no);
+      localStorage.setItem("todos", JSON.stringify(updatedTodos)); // Update localStorage
+      return updatedTodos;
+    });
   };
 
-  const toggle = (no) => {
-    let data = JSON.parse(localStorage.getItem("todos")) || [];
-
-    data = data.map((todo) => 
-      todo.no === no ? { ...todo, display: todo.display === "" ? "line-through" : "" } : todo
-    );
-
-    setTodos(data);
-    localStorage.setItem("todos", JSON.stringify(data)); // Update localStorage
+  const toggle = () => {
+    setTodos((prevTodos) => {
+      const updatedTodos = prevTodos.map((todo) => 
+        todo.no === no ? { ...todo, display: todo.display === "" ? "line-through" : "" } : todo
+      );
+      localStorage.setItem("todos", JSON.stringify(updatedTodos)); // Update localStorage
+      return updatedTodos;
+    });
   };
 
   return (
     <div className="todoitems">
-      <div className={`todoitems-container ${display}`} onClick={() => toggle(no)}>
-        {display === "" ? <img src={not_tick} alt="" /> : <img src={tick} alt="" />}
+      <div className={`todoitems-container ${display}`} onClick={toggle}>
+        <img src={display === "" ? not_tick : tick} alt="Toggle" />
         <div className="todoitems-text">{text}</div>
       </div>
-      <img className="todoitem-cross-icon" src={cross} alt="" onClick={() => Tododelete(no)} />
+      <img className="todoitem-cross-icon" src={cross} alt="Delete" onClick={Tododelete} />
     </div>
   );
 };
 
 export default Todoitems;
+
 
