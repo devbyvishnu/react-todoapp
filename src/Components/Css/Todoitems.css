@@ -1,0 +1,57 @@
+.todoitems {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 10px;
+    border-bottom: 1px solid #ddd;
+    transition: all 0.3s ease-in-out;
+}
+
+.todoitems:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.todoitems-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.todoitems-text {
+    color: #404040;
+    font-size: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.todoitem-cross-icon {
+    padding: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.todoitem-cross-icon:hover {
+    transform: scale(1.2);
+    opacity: 0.7;
+}
+
+/* ✅ Completed Task Style */
+.line-through {
+    text-decoration: line-through solid #adadad 3px;
+    color: #adadad;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 768px) {
+    .todoitems {
+        padding: 10px 5px;
+    }
+
+    .todoitems-text {
+        font-size: 18px;
+    }
+
+    .todoitem-cross-icon {
+        padding-right: 15px;
+    }
+}
