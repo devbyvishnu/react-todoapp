@@ -10,6 +10,7 @@
     flex-direction: column;
     padding: 20px;
     margin-bottom: 100px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .todo-header {
@@ -66,6 +67,13 @@
     background: #ff4500;
 }
 
+.todo-list {
+    background-color: #fff;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
 /* ✅ Responsive Design */
 @media (max-width: 768px) {
     .todo {
@@ -112,3 +120,9 @@
     cursor: pointer;
 }
 
+.empty-list-message {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+}

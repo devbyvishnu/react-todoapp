@@ -9,17 +9,21 @@ const Todo = () => {
    const inputRef = useRef(null);
 
    const add = () => {
-      if (!inputRef.current.value.trim()) return; // Prevent empty todos
-
+      if (!inputRef.current.value.trim()) return;
+    
+      const newCount = count + 1;
+      const newTodo = { no: newCount, text: inputRef.current.value, display: "" };
+    
       setTodos((prevTodos) => {
-         const newTodo = { no: count, text: inputRef.current.value, display: "" };
-         localStorage.setItem("TODOS_COUNT", count + 1);
-         count++; // Increment after saving
-         return [...prevTodos, newTodo];
+        return [...prevTodos, newTodo];
       });
-
+    
+      localStorage.setItem("TODOS_COUNT", newCount);
+      count = newCount;
+    
       inputRef.current.value = "";
-   };
+    };
+    
 
    useEffect(() => {
       const storedTodos = JSON.parse(localStorage.getItem("todos")) || [];
@@ -41,9 +45,21 @@ const Todo = () => {
          </div>
 
          <div className="todo-list">
-            {Todos.map((items) => (
-               <Todoitems key={items.no} setTodos={setTodos} no={items.no} display={items.display} text={items.text} />
-            ))}
+            {Todos.length === 0 ? (
+               <div className="empty-list-message">
+                  No tasks yet. Add a task to get started!
+               </div>
+            ) : (
+               Todos.map((item) => (
+                  <Todoitems 
+                     key={item.no} 
+                     setTodos={setTodos} 
+                     no={item.no} 
+                     display={item.display} 
+                     text={item.text} 
+                  />
+               ))
+            )}
          </div>
 
          <div className="devby">
@@ -53,5 +69,5 @@ const Todo = () => {
    );
 };
 
-export default Todo;
+export default Todo
 
